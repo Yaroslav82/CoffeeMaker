@@ -1,6 +1,24 @@
 package app;
 
+import java.util.InputMismatchException;
+import java.util.Objects;
+import java.util.Scanner;
+
 public class CoffeeMachine {
+
+    public void makeCoffee() {
+        try (Scanner sc = new Scanner(System.in)) {
+            printMenu();
+            Coffee coffee = getCoffeeById(sc.nextInt());
+            if (Objects.nonNull(coffee)) {
+                System.out.printf("Your %s. Enjoy :)", coffee.getName());
+            } else {
+                System.out.println("Unknown coffee id :(");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("The coffee ID must be an integer between 1 and 3.");
+        }
+    }
 
     private Coffee getCoffeeById(Integer id) {
         Coffee coffee = null;
